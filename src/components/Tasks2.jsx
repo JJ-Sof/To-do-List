@@ -6,7 +6,7 @@ const Task = ({ task, onChange }) => {
             <input
                 type = "checkbox"
                 checked = {task.completed}
-                onChange = {onChange(task.id)}
+                onChange = {() => {onChange(task.id)}}
             />
             <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
                 {task.text}
