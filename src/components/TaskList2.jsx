@@ -40,9 +40,20 @@ const TaskList = () => {
         localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     }
 
-    const renderedTasks = tasks.map(task => (
-        <Task key = {task.id} task = {task} onChange={toggleTask} onDelete={deleteTask}/>
-    ));
+    const clearList = () => {
+        setTasks([]);
+        localStorage.removeItem('tasks');
+    }
+
+    const leftColumnTasks = [];
+    const rightColumnTasks = [];
+    tasks.forEach((task, index) => {
+        if (index % 2 === 0) {
+            leftColumnTasks.push(task);
+        } else {
+            rightColumnTasks.push(task);
+        }
+    });
 
     return (
         <div className="task-list-container">
@@ -54,13 +65,18 @@ const TaskList = () => {
                     placeholder='Add a task'
                 />
                 <button type="submit">Add Task</button>
+                <button className='clear-button' onClick={clearList}>Clear tasks</button>
             </form>
             <div className="task-columns">
                 <div className="task-column">
-                    {renderedTasks.slice(0, Math.ceil(tasks.length / 2))}
+                    {leftColumnTasks.map(task => (
+                        <Task key={task.id} task={task} onChange={toggleTask} onDelete={deleteTask} />
+                    ))}
                 </div>
                 <div className="task-column">
-                    {renderedTasks.slice(Math.ceil(tasks.length / 2))}
+                    {rightColumnTasks.map(task => (
+                        <Task key={task.id} task={task} onChange={toggleTask} onDelete={deleteTask} />
+                    ))}
                 </div>
             </div>
         </div>

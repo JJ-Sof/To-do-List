@@ -27,6 +27,9 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  background-image: url('todolist-image7.jpg');
+  background-size: cover;
+  background-position: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -37,6 +40,7 @@ h1 {
 }
 
 button {
+  margin: 5px;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -71,6 +75,7 @@ button:focus-visible {
   flex: 1;
   margin-right: 20px;
 }
+
 
 .custom-checkbox {
   display: flex;
@@ -138,4 +143,17 @@ button:focus-visible {
 .completed-task {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+.clear-button {
+  margin: 5px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #390a90;
+  cursor: pointer;
+  transition: border-color 0.25s;
 }
