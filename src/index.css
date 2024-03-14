@@ -18,6 +18,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -26,43 +27,133 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  background-image: url('todolist-image7.jpg');
+  background-size: cover;
+  background-position: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3;
   line-height: 1.1;
 }
 
 button {
+  margin: 5px;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #390a90;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: red;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.task-list-container {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.task-columns {
+  display: flex;
+}
+
+.task-column {
+  flex: 1;
+  margin-right: 20px;
+}
+
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.custom-checkbox .form-check-input {
+  width: 30px; 
+  height: 30px; 
+}
+
+.custom-checkbox .form-check-input:checked {
+  background-color: navy; 
+  border-color: navy;
+}
+
+.custom-checkbox .form-check-input:hover {
+  cursor: pointer;
+}
+
+.custom-checkbox .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 128, 0.25);
+  border-color: rgb(55, 28, 165);
+}
+
+.custom-checkbox .form-check-input:active {
+  background-color: navy;
+  outline-color: navy;
+}
+
+.custom-checkbox label {
+  margin: 20px;
+  font-size: 30px;
+  color: #333;
+}
+
+.task-container {
+  display: flex;
+  align-items: center;
+}
+
+.task-display {
+  display: flex;
+  align-items: center;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.delete-btn:hover{
+  color: darkred;
+}
+
+.completed-task {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.clear-button {
+  margin: 5px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #390a90;
+  cursor: pointer;
+  transition: border-color 0.25s;
 }
