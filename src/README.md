@@ -2,7 +2,7 @@
 
 By: **Joel Jose**
 
-This web app: **This is an app that can be used to create a to-do-list for personal use with tasks that can be checked and deleted once they are complete.**
+Description: **This is an app that can be used to create a to-do-list for personal use with tasks that can be checked and deleted once they are complete.**
 ## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
