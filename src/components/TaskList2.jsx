@@ -1,7 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Task from './Tasks2';
 
 const TaskList = () => {
+
+    useEffect(() => {
+        const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        setTasks(storedTasks);
+    }, []);
 
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState('');
@@ -11,6 +16,7 @@ const TaskList = () => {
             task.id === taskId ? {...task, completed: !task.completed} : task
         );
         setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     }
 
     const addTask = (e) => {
@@ -23,15 +29,20 @@ const TaskList = () => {
                 completed: false,
             };
             setTasks([...tasks, newlyAddedTask]);
+            localStorage.setItem('tasks', JSON.stringify([...tasks, newlyAddedTask]));
             setNewTask('');
         }
     }
 
-    const renderTasks = () => {
-        return tasks.map(task => (
-            <Task key = {task.id} task = {task} onChange={toggleTask}/>
-        ))
+    const deleteTask = (taskId) => {
+        const updatedTasks = tasks.filter(task => task.id != taskId);
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     }
+
+    const renderedTasks = tasks.map(task => (
+        <Task key = {task.id} task = {task} onChange={toggleTask} onDelete={deleteTask}/>
+    ));
 
     return (
         <div className="task-list-container">
@@ -46,10 +57,10 @@ const TaskList = () => {
             </form>
             <div className="task-columns">
                 <div className="task-column">
-                    {renderTasks().slice(0, Math.ceil(tasks.length / 2))}
+                    {renderedTasks.slice(0, Math.ceil(tasks.length / 2))}
                 </div>
                 <div className="task-column">
-                    {renderTasks().slice(Math.ceil(tasks.length / 2))}
+                    {renderedTasks.slice(Math.ceil(tasks.length / 2))}
                 </div>
             </div>
         </div>
