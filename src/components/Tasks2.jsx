@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTask, deleteTask, startEditTask, saveEditTask, discardEditTask } from '../redux/actions'
+
 import Form from 'react-bootstrap/Form';
 
-const Task = ({ task, onChange, onDelete, startEdit, saveEdit, discardEdit}) => {
+const Task = ({ task }) => {
 
+    const dispatch = useDispatch();
     const [editText, setEditText] = useState(task.text);
     const [originalText, setOriginalText] = useState(task.text);
 
@@ -11,8 +15,12 @@ const Task = ({ task, onChange, onDelete, startEdit, saveEdit, discardEdit}) => 
         setOriginalText(task.text);
     }, [task.text]);
 
+    const handleToggleTask = () => {
+        dispatch(toggleTask(task.id));
+    }
+
     const handleDelete = () => {
-        onDelete(task.id);
+        dispatch(deleteTask(task.id));
     };
 
     const handleEditChange = (e) => {
@@ -25,7 +33,7 @@ const Task = ({ task, onChange, onDelete, startEdit, saveEdit, discardEdit}) => 
                 handleDelete();
             }
             else {
-                saveEdit(task.id, editText);
+                dispatch(saveEditTask(task.id, editText));
                 setOriginalText(editText)
             }
         }
@@ -33,7 +41,7 @@ const Task = ({ task, onChange, onDelete, startEdit, saveEdit, discardEdit}) => 
 
     const handleBlur = () => {
         setEditText(originalText);
-        discardEdit(task.id);
+        dispatch(discardEditTask(task.id));
     }
 
     return (
@@ -54,11 +62,11 @@ const Task = ({ task, onChange, onDelete, startEdit, saveEdit, discardEdit}) => 
                         className={`custom-checkbox  ${task.completed ? 'completed-task' : 'incomplete-task'}`}
                         type="checkbox"
                         checked={task.completed}
-                        onChange={() => onChange(task.id)}
+                        onChange={handleToggleTask}
                         label={task.text}
                     />
                     {!task.completed && (
-                        <button className='edit-button ml-auto' onClick={() => startEdit(task.id)}>Edit</button>
+                        <button className='edit-button ml-auto' onClick={() => startEditTask(task.id)}>Edit</button>
                     )}
                 </>
             )}

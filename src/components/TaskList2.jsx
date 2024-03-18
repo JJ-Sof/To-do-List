@@ -1,81 +1,37 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Task from './Tasks2';
+import { addTask, clearTasks } from '../redux/actions';
 
 const TaskList = () => {
 
-    useEffect(() => {
-        const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        setTasks(storedTasks);
-    }, []);
+    const tasks = useSelector(state => state.tasks);
+    const dispatch = useDispatch();
 
-    const [tasks, setTasks] = useState([]);
-    const [newTask, setNewTask] = useState('');
+    const [newTaskText, setNewTaskText] = useState('');
     const [filter, setFilter] = useState('all');
-    const [showDropDown, setShowDropDown] = useState(false);
 
-    const toggleTask = (taskId) => {
-        const updatedTasks = tasks.map(task =>
-            task.id === taskId ? {...task, completed: !task.completed} : task
-        );
-        setTasks(updatedTasks);
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-    }
-
-    const addTask = (e) => {
+    const handleAddTask = (e) => {
         e.preventDefault();
-        const text1 = newTask.trim();
-        if (text1 != ''){
-            const newlyAddedTask = {
-                id: Date.now(),
-                text: text1,
-                completed: false,
-                isEditing: false
-            };
-            setTasks([...tasks, newlyAddedTask]);
-            localStorage.setItem('tasks', JSON.stringify([...tasks, newlyAddedTask]));
-            setNewTask('');
+        const text1 = newTaskText.trim();
+        if (text1 !== ''){
+            dispatch(addTask(text1));
+            setNewTaskText('');
         }
     }
 
-    const deleteTask = (taskId) => {
-        const updatedTasks = tasks.filter(task => task.id != taskId);
-        setTasks(updatedTasks);
-        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-    }
-
-    const startEditTask = (taskId) => {
-        const updatedTasks = tasks.map(task => 
-            task.id === taskId ? {...task, isEditing: true} : {...task, isEditing: false}
-        );
-        setTasks(updatedTasks);
-    }
-
-    const saveEditTask = (taskId, newText) => {
-        const updatedTasks = tasks.map(task => 
-            task.id === taskId ? {...task, text: newText, isEditing: false} : task
-        );
-        setTasks(updatedTasks);
-        localStorage.setItem('task', JSON.stringify(updatedTasks));
-    }
-
-    const discardEditTask = (taskId) => {
-        const updatedTasks = tasks.map(task => 
-            task.id === taskId ? {...task, isEditing: false} : task
-        );
-        setTasks(updatedTasks);
-        localStorage.setItem('task', JSON.stringify(updatedTasks));
-    }
-
     const clearList = () => {
-        setTasks([]);
-        localStorage.removeItem('tasks');
+        dispatch(clearTasks());
     }
 
+    const handleChange = (e) => {
+        setNewTaskText(e.target.value);
+    }
+    
     const filterTasks = (selectedFilter) => {
         setFilter(selectedFilter);
-        setShowDropDown(false);
     }
-
+    
     const filteredTasks = tasks.filter(task => {
         if (filter === 'all'){
             return true;
@@ -100,13 +56,13 @@ const TaskList = () => {
 
     return (
         <div className="task-list-container">
-            <form onSubmit = {addTask}>
+            <form onSubmit = {handleAddTask}>
                 <div className='add-task-container'>
                     <input
                         type="text"
-                        value={newTask}
+                        value={newTaskText}
                         className='task-input'
-                        onChange= {(e) => setNewTask(e.target.value)} 
+                        onChange= {handleChange} 
                         placeholder='Add a task'
                     />
                     <button type="submit">Add Task</button>
@@ -124,12 +80,12 @@ const TaskList = () => {
             <div className="task-columns">
                 <div className="task-column">
                     {leftColumnTasks.map(task => (
-                        <Task key={task.id} task={task} onChange={toggleTask} onDelete={deleteTask} startEdit={startEditTask} saveEdit={saveEditTask} discardEdit={discardEditTask}/>
+                        <Task key={task.id} task={task}/>
                     ))}
                 </div>
                 <div className="task-column">
                     {rightColumnTasks.map(task => (
-                        <Task key={task.id} task={task} onChange={toggleTask} onDelete={deleteTask} startEdit={startEditTask} saveEdit={saveEditTask} discardEdit={discardEditTask}/>
+                        <Task key={task.id} task={task}/>
                     ))}
                 </div>
             </div>
