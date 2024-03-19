@@ -27,7 +27,7 @@ const Task = ({ task }) => {
     };
 
     const handleEditChange = (e) => {
-        setEditText(e.target.value)
+        setEditText(e.target.value);
     }
     
     const handleKeyDown = (e) => {
@@ -37,7 +37,7 @@ const Task = ({ task }) => {
             }
             else {
                 dispatch(saveEditTask(task.id, editText));
-                setOriginalText(editText)
+                setOriginalText(editText);
             }
         }
     }
