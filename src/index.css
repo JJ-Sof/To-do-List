@@ -162,6 +162,7 @@ button:focus-visible {
   background-color: transparent;
   border: none;
   padding: 0;
+  color: green;
   cursor: pointer;
 }
 
