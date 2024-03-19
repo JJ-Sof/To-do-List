@@ -2,7 +2,8 @@
 
 By: **Joel Jose**
 
-Description: **This is an app that can be used to create a to-do-list for personal use with tasks that can be checked and deleted once they are complete.**
+Description: **This is an app that can be used to create a to-do-list for personal use with tasks that can be checked and deleted once they are complete. Type in your task and click the "Add Task" button to add. Click on the edit button to edit the text of a task, and hit Enter to save. Tasks can be filtered based on completion status using the select menu**
+
 ## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
