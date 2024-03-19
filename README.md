@@ -8,7 +8,7 @@ Description: **This is an app that can be used to create a to-do-list for person
 
 Here's a walkthrough of implemented required features:
 
-<img src='./ToDoListGif.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./ToDoList2Gif.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with ScreenToGif
 
