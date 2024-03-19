@@ -19,6 +19,9 @@ const Task = ({ task }) => {
         dispatch(toggleTask(task.id));
     }
 
+    const handleStartEditTask = () => {
+        dispatch(startEditTask(task.id));
+    }
     const handleDelete = () => {
         dispatch(deleteTask(task.id));
     };
@@ -66,7 +69,7 @@ const Task = ({ task }) => {
                         label={task.text}
                     />
                     {!task.completed && (
-                        <button className='edit-button ml-auto' onClick={() => startEditTask(task.id)}>Edit</button>
+                        <button className='edit-button ml-auto' onClick={handleStartEditTask}>Edit</button>
                     )}
                 </>
             )}

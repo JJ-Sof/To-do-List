@@ -5,7 +5,7 @@ import { addTask, clearTasks } from '../redux/actions';
 
 const TaskList = () => {
 
-    const tasks = useSelector(state => state.tasks);
+    const tasks = useSelector(state => state.tasks.tasks);
     const dispatch = useDispatch();
 
     const [newTaskText, setNewTaskText] = useState('');

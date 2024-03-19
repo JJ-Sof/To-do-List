@@ -22,14 +22,14 @@ export const deleteTask = (taskId) => ({
 });
 
 export const startEditTask = (taskId) => ({
-    type: 'START_EDIT_TASK',
+    type: action.START_EDIT_TASK,
     payload: { 
         taskId 
     }
 });
   
 export const saveEditTask = (taskId, newText) => ({
-    type: 'SAVE_EDIT_TASK',
+    type: action.SAVE_EDIT_TASK,
     payload: { 
         taskId, 
         newText 
@@ -37,7 +37,7 @@ export const saveEditTask = (taskId, newText) => ({
 });
   
 export const discardEditTask = (taskId) => ({
-    type: 'DISCARD_EDIT_TASK',
+    type: action.DISCARD_EDIT_TASK,
     payload: { 
         taskId 
     }

@@ -1,9 +1,10 @@
+import { toggleTask } from '../actions';
 import * as actions from '../actions/actionStyles'
 
 
 const taskReducer = (state  = {tasks: []}, action) => {
     let updatedTasks = [];
-    console.log(state.tasks);
+    //console.log(state.tasks);
     switch(action.type) {
         case actions.ADD_TASK:
             console.log(state.tasks);
@@ -24,16 +25,15 @@ const taskReducer = (state  = {tasks: []}, action) => {
             };
         case actions.TOGGLE_TASK:
             updatedTasks = state.tasks.map(task => 
-                task.id === action.payload ? { ...task, completed: !task.completed } : task
+                task.id === action.payload.taskId ? {...task, completed: !task.completed} : task
             );
-            console.log(updatedTasks);
             localStorage.setItem('tasks', JSON.stringify(updatedTasks));
             return {
                 ...state,
                 tasks: updatedTasks
             };
         case actions.DELETE_TASK:
-            updatedTasks = state.tasks.filter(task => task.id !== action.payload)
+            updatedTasks = state.tasks.filter(task => task.id !== action.payload.taskId)
             localStorage.setItem('tasks', JSON.stringify(updatedTasks));
             return {
                 ...state,
@@ -43,12 +43,14 @@ const taskReducer = (state  = {tasks: []}, action) => {
             updatedTasks = state.tasks.map(task => 
                 task.id === action.payload.taskId ? {...task, isEditing: true} : {...task, isEditing: false}
             )
+            console.log(updatedTasks);
             return {
                 ...state,
                 tasks: updatedTasks
             };
         case actions.SAVE_EDIT_TASK:
             const {taskId, newText} = action.payload;
+            console.log(taskId + " " + newText);
             updatedTasks = state.tasks.map(task => 
                 task.id === taskId ? {...task, text: newText} : task
             );

@@ -4,7 +4,9 @@ import rootReducer from '../reducers';
 const tasksFromLocalStorage = JSON.parse(localStorage.getItem('tasks')) || [];
 
 const initialState = {
-    tasks: tasksFromLocalStorage
+    tasks: {
+        tasks: tasksFromLocalStorage
+    }
 };
 //console.log(initialState)
 
